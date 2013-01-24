@@ -1,0 +1,250 @@
+<p id="notice"><%= notice %></p>
+<h1> Airport Information for <%= @faafacility.LocationID %>, <%= @faafacility.City %>  </h1>
+<p>
+	<em> This data is presented for convience only, no gaurantees are made or implied as to its accuracy! </em>
+</p>
+
+<p>
+	<%= link_to 'Back', faafacilities_path %>
+</p>
+
+<b> Effective Date: </b> <%= @faafacility.EffectiveDate %>
+
+<p>
+	<b> Latitude: </b> <%= @faafacility.ARPLatitude %>
+</p>
+
+<p>
+	<b> Longitude: </b> <%= @faafacility.ARPLongitude %>
+</p>
+
+<p>
+	<b> Elevation: </b> <%= @faafacility.ARPElevation %>
+</p>
+
+<p>
+	<b> Variation: </b> <%= @faafacility.MagneticVariation %> <%= @faafacility.MagneticVariationYear %>
+</p>
+
+<p>
+	<b> From City: </b> <%= @faafacility.DistanceFromCBD%> miles <%= @faafacility.DirectionFromCBD%> of <%= @faafacility.City%>, <%= @faafacility.State  %> 
+</p>
+
+<p>
+	<b> ARTCC: </b> <%= @faafacility.BoundaryARTCCID %>
+</p>
+
+<p>
+	<b> Section Chart: </b> <%= @faafacility.ChartName %>
+</p>
+
+<hr noshade size = "1">
+
+<h3> Airport Operations </h3>
+<table> <table width= "60%"> 
+	<tr>
+		<%-# Airport status info -%>
+		<% if @faafacility.AirportStatusCode ==	"O" %>
+			<% status = "Operational" %>
+		<% elsif @faafacility.AirportStatusCode == "CP" %>
+			<% status = "Closed Permanently" %>
+		<% elsif @faafacility.AirportStatusCode == "CI" %>
+			<% status = "Closed Indefinitely" %>
+		<% else %>
+			<% status = "Unknown" %>
+		<% end %>
+
+			<td align="left"> <b> Status: </b></td><td></td> <td align="left"> <%= status %></td>	
+
+
+		<%-# Wind direction indicator. (ex. Y - yes, N - no, none) -%>
+		<% if @faafacility.WindIndicator == "N" %>
+			<% sock = "No" %>
+		<% elsif @faafacility.WindIndicator == "Y" %>
+			<% sock = "Yes" %>
+		<% else %>
+			<% sock = "unknown" %>
+		<% end %>
+
+		<td align="left"> <b> Wind Indicator: </b> </td><td></td>  <td align="left"> <%= sock %> </td>
+		
+	</tr>
+
+	<tr>
+		<%-# Airport use info -%>
+		<% if @faafacility.Use == "PU" %>
+			<% use = "Open to Public" %>
+		<% elsif @faafacility.AirportStatusCode == "PR" %>
+			<% use = "Private" %>
+		<% else %>
+			<% use = "unknown" %>
+		<% end %>
+
+		<td align="left"> <b> Facility use: </b> </td> <td></td> <td align="left"> <%= use %> </td>
+	
+
+		<%-# Segmented Circle %>
+		<% if @faafacility.SegmentedCircle == "N" %>
+			<% scir = "No" %>
+		<% elsif @faafacility.SegmentedCircle == "Y" %>
+			<% scir = "Yes" %>
+		<% else %>
+			<% scir = "unknown" %>
+		<% end %>
+
+		<td align="left"><b> Segmented Circle: </b> </td><td></td>  <td align="left">  <%= sock %> </td>
+	
+	</tr>
+
+	<tr>
+		<%-# Air traffic control? -%>
+		<% if @faafacility.ATCT == "N" %>
+			<% atct = "No air traffic control tower" %>
+		<% elsif @faafacility.ATCT == "Y" %>
+			<% atct = "Air traffic control tower" %>
+		<% else %>
+			<% atct = "unknown" %>
+		<% end %>
+
+		<td align="left"><b> Control Tower: </b> </td> <td></td> <td align="left"> <%= atct %> </td>
+
+		<%-# Lights info haven't figure out where this comes from %>
+	</tr>
+
+	<tr>
+		<%-# NOTAM Info -%>
+		<% if @faafacility.NOTAMService == "Y" %>
+			<td align="left"><b> NOTAM Facility: </b> </td><td></td>  <td align="left"> <%= @faafacility.NOTAMFacilityID %> </td>
+		<% end %>
+
+		<td></td> <td></td>
+
+	</tr>
+
+	<tr>
+		<%-# Attendance -%>
+		<td align="left", valign="top"><b> Attendence(Months/Days/Hours): </b> </td> 
+		<td></td> <td align="left">
+			<% @faaschedules.each do |schedule| %>
+				<% if schedule.AttendanceSchedule == "UNATNDD" %>
+					<%  sch = "Unattended" %>
+				<% elsif schedule.AttendanceSchedule == "ALL/ALL/ALL" %>
+					<% sch = "Continuous" %>
+				<% else %>
+					<% sch = schedule.AttendanceSchedule %>
+				<% end %>
+			 <%= schedule.AttendanceSchedule %><br>
+
+			<% end %>
+		</td>
+
+		<%-# Beacon colors and schedule %>
+		<% if @faafacility.BeaconColor != " " %> 
+			<% if @faafacility.BeaconColor == "CG" %>
+				<% bc = "Clear and Yellow" %>
+			<%elsif @faafacility.BeaconColor == "CGY" %>
+				<% bc = "Clear, Green and Yellow" %>
+			<% elsif @faafacility.BeaconColor == "SCG" %>
+				<% bc = "Spilt Clear and Green" %>
+			<% elsif @faafacility.BeaconColor == "C" %>
+				<% bc = "Clear" %>
+			<% else %>
+				<% bc = @faafacility.BeaconColor %>
+			<% end %>
+
+			<td align="left"><b> Beacon: </b> </td><td></td>  <td align="left"> <%= bc %><b>  /  </b> <%= @faafacility.BeaconSchedule %> </td>
+
+		<% end %>
+	</tr>
+
+	<tr>
+		<td></td> <td></td> <td></td>
+
+		<%-# Fuel avail and types %> 
+		<% if @faafacility.FuelTypes != " " %>
+			<td align="left"><b> Fuel: </b> </td><td></td>  <td align="left"> <%= @faafacility.FuelTypes %> </td>
+		<% end %>
+
+
+</table>
+
+<hr noshade size = "1">
+<h3> Airport Contacts </h3>
+<table> <table width= "80%"> 
+	<tr> <td><b> MANAGER: </b></td> <td> <b> OWNER: </b> </td> </tr>
+	<tr> <td> <%= @faafacility.Manager %> </td> <td>  <%= @faafacility.Owner %> </td></tr>
+	<tr> <td> <%= @faafacility.ManagerAddress %> </td> <td><%= @faafacility.OwnerAddress %> </td> </tr>
+	<tr> <td> <%= @faafacility.ManagerCSZ %> </td> <td><%= @faafacility.OwnerCSZ %> </td> </tr>
+	<tr> <td> <%= @faafacility.ManagerPhone %> </td> <td><%= @faafacility.OwnerPhone %> </td> </tr>
+</table>
+
+
+<hr noshade size = "1">
+
+<h3> FAA REMARKS </h3>
+<table>
+  <tr>
+  
+  </tr>
+<% if @remark.blank? %>
+  <% @remarks.each do |remark| %>
+  <tr>
+  	<ul>
+  	<td> <li><%= remark.Remarks %></td>
+  	</ul>
+ </tr>
+ <% end %>
+<% else %>
+  <tr>
+  	<td colspan=4>There are no remarks for this site.</td>
+  </tr>
+<% end %>
+
+</table>
+<hr noshade size = "1">
+<h3> Airport Communications </h3>
+<% if @faafacility.UNICOMFrequencies != " " %>
+	<p>
+		<b> UNICOM: </b> <%= @faafacility.UNICOMFrequencies %>
+	</p>
+</table>
+<% end %>
+
+
+<hr noshade size = "1">
+<h3> Runway Information </h3>
+<% @faarunways.each do |runway| %>
+	<table> <table width= "60%">
+	<th><align = "center"> 
+		<%= runway.RunwayID %><b>
+	</th>
+	  <tr>
+	  	<td> <b> Dimensions: </b> </td>
+	  	<td> <%= runway.RunwayLength %> <font size="2"> x </font> <%= runway.RunwayWidth %> </td>
+	  	<td> <b> Weight Limitations </b> </td>
+	  	
+	  </tr>
+	  <tr>
+	  	<td> <b> Surface Type: </b> </td>
+	  	<td> <%= runway.RunwaySurfaceTypeCondition %> </td>
+	  	<td> <b> PCN: </b></td>
+	  </tr>
+	  <tr>
+	  	<td> <b> Treatment: </b> </td>
+	  	<td> <%= runway.RunwaySurfaceTreatment %> </td>
+	  	<td> <b> Single Wheel: </b> </td>
+	  	<% if runway.RunwayWeightBearingCapacitySW.present? %>
+	  		<td> <%= runway.RunwayWeightBearingCapacitySW %> <font size="2"> ,000 </font> </td>
+	  	<% end %> 
+
+
+	  </tr>
+
+</table>
+<% end %>
+ 
+
+
+ 
+
+

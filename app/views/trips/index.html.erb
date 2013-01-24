@@ -1,0 +1,33 @@
+<h1><%= current_user.user_name %>'s Trips</h1>
+
+<table>
+  <tr>
+    <th>Departure time</th>
+    <th>Arrival time</th>
+    <th>Departed</th>
+    <th>Destination</th>
+    <th>Summary</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @trips.each do |trip| %>
+  <tr>
+    <td><%= trip.departure_time %></td>
+    <td><%= trip.arrival_time %></td>
+    <td><% departed = Faafacility.find(:first, :conditions => [ "LocationID = ?", trip.departed]) %>
+    <%= link_to(departed.FacilityName, departed) %></td>
+    <td><% dest = Faafacility.find(:first, :conditions => [ "LocationID = ?", trip.destination]) %>
+	<%= link_to(dest.FacilityName, dest) %></td>
+    <td><%= trip.summary %></td>
+    <td><%= link_to 'Details', trip %></td>
+    <td><%= link_to 'Edit', edit_trip_path(trip) %></td>
+    <td><%= link_to 'Remove', trip, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Add a Trip', new_trip_path %>

@@ -1,0 +1,36 @@
+
+&nbsp;
+<div id="facilityheader">FAA Registered Landing Sites</div>
+
+
+
+<%= form_tag faafacilities_path, :method => 'get' do %>  
+  <p>  
+    <%= text_field_tag :search, params[:search] %>  
+    <%= submit_tag "Search Airport Code", :name => nil %>  
+</p>  
+
+<% end %>  
+
+<table>
+	<tr><td>&nbsp;</td></tr>
+  <tr>
+  	<th align = "left">City</th>
+	<th align = "left">Airport Name</th>
+    <th>Airport Code</th>
+   <th></th>
+  </tr>
+
+<% @faafacilities.each do |faafacility| %>
+  <tr>
+  	<td><%= faafacility.City %></td>
+    <td><%= faafacility.FacilityName %></td>
+    <td><%= link_to faafacility.LocationID, faafacility%></td>
+  </tr>
+<% end %>
+
+
+</table>
+
+<br />
+

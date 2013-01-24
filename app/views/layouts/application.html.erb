@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Alaska Landings</title>
+  <%= stylesheet_link_tag  "application", :media =>   "all" %> 
+  <%= javascript_include_tag :application %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+ 
+
+	<p class="notice"><%= notice %></p>
+	<p class="alert"><%= alert %></p>
+	<div id="header">
+		<div id="title">
+			Alaska Landings
+		</div>
+		<div id="login">
+	 		<% if current_user %>
+	 			<%= current_user.email %>
+	 			<%= link_to "Logout", destroy_user_session_path, :method => :delete %>
+	 			<%= link_to "Profile", profiles_show_path %>
+	 			<%= link_to "Edit Profile", edit_user_registration_path%>
+	 		<% else %>
+	 			Hello, Guest. Please <%= link_to "Login", new_user_session_path %>
+	 			 or <%= link_to "Sign up", new_user_registration_path %>
+
+			<% end %>
+		</div>
+	</div>
+	<br />
+	<div id="header2">
+		<div id="slogan">“Flying is the second greatest thrill known to man....
+						the first is landing.” 
+		</div>
+		<div id="navigation">
+ 		<%= link_to "Home", root_path %>
+ 		<%= link_to "Landing Sites", faafacilities_path %>
+		<% if current_user %>
+			<%= link_to "My Planes", planes_path %>
+			<%= link_to "My Trips", trips_path %>
+		<% end %>
+
+		</div>
+	</div>
+	<br />
+	<br />
+	<div id="headerbreak">&nbsp;</div>
+
+<%= yield %>
+ 
+</body>
+</html>

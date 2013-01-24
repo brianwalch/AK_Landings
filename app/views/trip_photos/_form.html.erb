@@ -1,0 +1,29 @@
+<%= form_for(@trip_photo) do |f| %>
+  <% if @trip_photo.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@trip_photo.errors.count, "error") %> prohibited this trip_photo from being saved:</h2>
+
+      <ul>
+      <% @trip_photo.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :trip_image %><br />
+   <%= f.file_field :trip_image %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_field :description %>
+  </div>
+  <div class="field">
+    <%= f.label :trip_id %><br />
+    <%= f.select :trip_id,current_user.trips.map{|t| [t.summary, t.id]} %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Add Photo" %>
+  </div>
+<% end %>

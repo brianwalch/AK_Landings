@@ -1,0 +1,35 @@
+<h1><%= current_user.user_name %>'s Planes</h1>
+
+<table>
+  <tr>
+    <th>Manufacturer</th>
+    <th>Plane type</th>
+    <th>Year</th>
+    <th>Cruise speed</th>
+    <th>N number</th>
+    <th>Color</th>
+    <th>Home base</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @planes.each do |plane| %>
+  <tr>
+    <td><%= plane.manufacturer %></td>
+    <td><%= plane.plane_type %></td>
+    <td><%= plane.year %></td>
+    <td><%= plane.cruise_speed %></td>
+    <td><%= plane.n_number %></td>
+    <td><%= plane.color %></td>
+    <td><%= plane.home_base %></td>
+    <td><%= link_to 'Details', plane %></td>
+    <td><%= link_to 'Edit', edit_plane_path(plane) %></td>
+    <td><%= link_to 'Remove', plane, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Add a Plane', new_plane_path %>

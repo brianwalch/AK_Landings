@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Plane:</b>
+  <%= @plane_photo.plane.n_number %>
+</p>
+
+<p>
+  <b>Plane image:</b>
+  <%= image_tag @plane_photo.plane_image_url(:thumb).to_s %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @plane_photo.description %>
+</p>
+
+
+<%= link_to 'Edit', edit_plane_photo_path(@plane_photo) %> |
+<%= link_to 'Back', plane_plane_photo_path(id: @plane_photo.plane.id) %>

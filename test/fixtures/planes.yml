@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  manufacturer: MyString
+  plane_type: MyString
+  year: MyString
+  cruise_speed: MyString
+  n_number: MyString
+  color: MyString
+  home_base: MyString
+
+two:
+  manufacturer: MyString
+  plane_type: MyString
+  year: MyString
+  cruise_speed: MyString
+  n_number: MyString
+  color: MyString
+  home_base: MyString

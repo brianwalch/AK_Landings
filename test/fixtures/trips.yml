@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  departure_time: 2012-10-08 01:40:16
+  arrival_time: 2012-10-08 01:40:16
+  departed: MyString
+  destination: MyString
+  waypoints: MyString
+  summary: MyString
+  notes: MyText
+
+two:
+  departure_time: 2012-10-08 01:40:16
+  arrival_time: 2012-10-08 01:40:16
+  departed: MyString
+  destination: MyString
+  waypoints: MyString
+  summary: MyString
+  notes: MyText

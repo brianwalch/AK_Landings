@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Manufacturer:</b>
+  <%= @plane.manufacturer %>
+</p>
+
+<p>
+  <b>Plane type:</b>
+  <%= @plane.plane_type %>
+</p>
+
+<p>
+  <b>Year:</b>
+  <%= @plane.year %>
+</p>
+
+<p>
+  <b>Cruise speed:</b>
+  <%= @plane.cruise_speed %>
+</p>
+
+<p>
+  <b>N number:</b>
+  <%= @plane.n_number %>
+</p>
+
+<p>
+  <b>Color:</b>
+  <%= @plane.color %>
+</p>
+
+<p>
+  <b>Home base:</b>
+  <%= @plane.home_base %>
+</p>
+
+<%= link_to "View/Add plane photo(s)", plane_plane_photo_path(id: @plane.id) %>
+<%= link_to 'Edit', edit_plane_path(@plane) %> |
+<%= link_to 'Back to all planes', planes_path %>

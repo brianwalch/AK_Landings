@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Departure time:</b>
+  <%= @trip.departure_time %>
+</p>
+
+<p>
+  <b>Arrival time:</b>
+  <%= @trip.arrival_time %>
+</p>
+
+<p>
+  <b>Departed:</b>
+  <% departed = Faafacility.find(:first, :conditions => [ "LocationID = ?", @trip.departed]) %>
+  <%= link_to(departed.FacilityName, departed) %>
+</p>
+
+<p>
+  <b>Destination:</b>
+  <% dest = Faafacility.find(:first, :conditions => [ "LocationID = ?", @trip.destination]) %>
+  <%= link_to(dest.FacilityName, dest) %>
+</p>
+
+<p>
+  <b>Waypoints:</b>
+  <% @trip.waypoints = @trip.waypoints.split(/[[:space:]]-[[:space:]]/) %>
+  <% @trip.waypoints.shift %>
+  <% @trip.waypoints.shift %>
+  <% @trip.waypoints.last %>
+  <% @trip.waypoints.each do |wayp| %>
+    <% point = Faafacility.find(:first, :conditions => [ "LocationID = ?", wayp]) %>
+    <%-# link_to(point.FacilityName, point) -%>
+  <% end %>
+</p>
+
+<p>
+  <b>Summary:</b>
+  <%= @trip.summary %>
+</p>
+
+<p>
+  <b>Notes:</b>
+  <%= @trip.notes %>
+</p>
+
+<%= link_to "Trip photos", trip_trip_photo_path(id: @trip.id) %>
+<%= link_to 'Edit', edit_trip_path(@trip) %> |
+<%= link_to 'Back to all trips', trips_path %>

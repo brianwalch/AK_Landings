@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User image:</b>
+  <%= image_tag @user_photo.user_image_url(:thumb).to_s %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @user_photo.description %>
+</p>
+
+
+<%= link_to 'Edit', edit_user_photo_path(@user_photo) %> |
+<%= link_to 'Back', user_photos_path %>

@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+
+<p>
+  <b>Trip:</b>
+  <%= @trip_photo.trip.summary %>
+</p>
+<p>
+  <b>Trip image:</b>
+  <%= image_tag @trip_photo.trip_image_url(:thumb).to_s %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @trip_photo.description %>
+</p>
+
+
+<%= link_to 'Edit', edit_trip_photo_path(@trip_photo) %> |
+<%= link_to 'Back to all photos', trip_trip_photo_path(id: @trip_photo.trip.id) %>

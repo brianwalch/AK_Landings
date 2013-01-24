@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  plane_id: 1
+  plane_image: MyString
+  description: MyString
+
+two:
+  plane_id: 1
+  plane_image: MyString
+  description: MyString
